@@ -1,0 +1,8 @@
+Django==3.2.15
+django-filter==21.1
+djangorestframework==3.13.1
+Markdown==3.3.7
+djangorestframework-simplejwt==4.4.0
+pyjwt==1.7.1
+drf-yasg==1.21.3
+psycopg2 == 2.9.3./m

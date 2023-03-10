@@ -1,0 +1,39 @@
+.idea
+*~
+\#*#
+\.#*
+\#*\#
+scripts/contact*
+celerybeat*
+.deliver/releases/
+/*.log
+*.retry
+postgres-data/
+*.pyc
+
+# Distribution / packaging
+.python-version
+env/
+venv/
+apps/dashboard/
+
+# reload file
+reload
+
+# media files
+media/
+
+# static folders
+static/admin
+static/ckeditor
+static/rest_framework
+
+# coverage
+.coverage
+
+# accounting exctra
+apps/accounting/extra/*
+!apps/accounting/extra/ttms.mdb
+
+# Pycharm
+.idea/
