@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     # Local app
     'apps.share',
-    # 'apps.dashboard',
+    'apps.dashboard',
 ]
 
 MIDDLEWARE = [

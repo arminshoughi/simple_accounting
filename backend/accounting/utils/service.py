@@ -14,7 +14,7 @@ class BaseService:
     @classmethod
     def get(cls, **kwargs):
         try:
-            return cls.model.objects.get(is_deleted=False, **kwargs)
+            return cls.model.objects.get(**kwargs)
         except (cls.model.DoesNotExists, ValueError):
             raise ObjectNotFound(cls.model)
 
@@ -27,7 +27,7 @@ class BaseService:
 
     @classmethod
     def filter(cls, **kwargs):
-        return cls.model.objects.filter(is_deleted=False, **kwargs)
+        return cls.model.objects.filter(**kwargs)
 
     @classmethod
     def all(cls):
@@ -76,9 +76,7 @@ class BaseService:
     @classmethod
     def delete(cls, obj):
         try:
-            obj.is_deleted = True
-            obj.deleted_at = timezone.now()
-            obj.save()
+            obj.delete()
         except ProtectedError:
             raise ObjectDeleteProtected
         except:
