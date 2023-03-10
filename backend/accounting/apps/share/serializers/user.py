@@ -14,3 +14,6 @@ class UserRegisterSerializer(DynamicFieldsModelSerializer):
             'updated_at', 'created_at', 'last_login', 'is_active', 'is_superuser', 'is_deleted',
             'deleted_at'
         ]
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
