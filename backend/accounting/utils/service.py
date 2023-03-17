@@ -69,7 +69,8 @@ class BaseService:
             updated_field.append('updated_at')
 
         try:
-            return obj.save(updated_field=updated_field)
+            obj.save(update_fields=updated_field)
+            return obj
         except IntegrityError:
             raise DbIntegrityError
 
