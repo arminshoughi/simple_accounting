@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.db.models import Sum, FloatField
+from django.db.models.functions import Coalesce
 
 from utils.models import BaseModel
 
 from .. import consts
 from ..validators import UsernameValidator, NationalCodeValidator, PhoneValidator
+from ...dashboard.consts import AccountTypeChoices
 
 
 class UserManagement(BaseUserManager):
@@ -60,53 +63,11 @@ class UserModel(AbstractBaseUser, BaseModel):
         return self.is_superuser
 
     @property
-    def default_phone(self):
-        return self.phones.filter(is_default=True).first()
-
-    @property
-    def default_mobile(self):
-        return self.mobiles.filter(is_default=True).first()
-
-    @property
-    def default_address(self):
-        return self.addresses.filter(is_default=True).first()
-
-    @property
-    def default_emails(self):
-        return self.emails.filter(is_default=True).first()
-
-
-class UserPhoneModel(BaseModel):
-    user = models.ForeignKey(verbose_name='User', to=UserModel, related_name='phones', on_delete=models.CASCADE)
-    phone = models.CharField(verbose_name='Phone', max_length=11, validators=[PhoneValidator()])
-    is_default = models.BooleanField(verbose_name='Default', default=False)
-
-    def __str__(self):
-        return self.phone
-
-
-class UserMobileModel(BaseModel):
-    user = models.ForeignKey(verbose_name='User', to=UserModel, related_name='mobiles', on_delete=models.CASCADE)
-    mobile = models.CharField(verbose_name='Mobile', max_length=11, validators=[PhoneValidator()])
-    is_default = models.BooleanField(verbose_name='Default', default=False)
-
-    def __str__(self):
-        return self.mobile
-
-
-class UserAddressModel(BaseModel):
-    user = models.ForeignKey(verbose_name='User', to=UserModel, related_name='addresses', on_delete=models.CASCADE)
-    address = models.TextField(verbose_name='Address', null=False, blank=False)
-    is_default = models.BooleanField(verbose_name='Default', default=False)
-
-    def __str__(self):
-        return self.address[:50]
-
-
-class UserEmailModel(BaseModel):
-    user = models.ForeignKey(verbose_name='User', to=UserModel, related_name='emails', on_delete=models.CASCADE)
-    email = models.EmailField(verbose_name='Email', null=False, blank=False)
-    is_default = models.BooleanField(verbose_name='Default', default=False)
-
-    def __str__(self):
-        return self.email
+    def inventory(self):
+        input_amount = self.accounts.filter(
+            typ=AccountTypeChoices.INPUT, is_draft=False
+        ).aggregate(sum=Coalesce(Sum('amount'), 0, output_field=FloatField()))["sum"]
+        output_amount = self.accounts.filter(
+            typ=AccountTypeChoices.OUTPUT, is_draft=False
+        ).aggregate(sum=Coalesce(Sum('amount'), 0, output_field=FloatField()))["sum"]
+        return input_amount - output_amount
