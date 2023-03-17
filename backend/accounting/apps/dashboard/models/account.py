@@ -7,7 +7,7 @@ UserModel = get_user_model()
 
 
 class AccountModel(models.Model):
-    user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE, related_name='accounts')
     title = models.CharField(verbose_name='title', max_length=256, null=False, blank=False)
     description = models.TextField(verbose_name='description', null=True, blank=True)
     amount = models.FloatField(verbose_name='amount', null=False, blank=False)
@@ -27,7 +27,7 @@ class AccountModel(models.Model):
 
 
 class ReminderModel(models.Model):
-    user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE, related_name='reminders')
     title = models.CharField(verbose_name='title', max_length=256, null=False, blank=False)
     description = models.TextField(verbose_name='description', null=True, blank=True)
     amount = models.FloatField(verbose_name='amount', null=False, blank=False)
