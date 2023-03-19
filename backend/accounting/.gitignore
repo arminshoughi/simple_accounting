@@ -36,3 +36,7 @@ apps/accounting/extra/*
 
 # Pycharm
 .idea/
+
+# Database stuff
+*.sqlite3s
+db.sqlite3
