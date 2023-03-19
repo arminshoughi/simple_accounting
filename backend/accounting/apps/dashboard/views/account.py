@@ -36,6 +36,39 @@ def user_saving_amount_in_specific_month(request, year, month):
     return Response(data={'saving_amount': income - expense}, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def diagram_view(request):
+    base_qs = AccountService.filter(user=request.user)
+    user_input_accounts = base_qs.filter(typ=AccountTypeChoices.INPUT).values(
+        'created_at__year', 'created_at__month', 'typ'
+    ).annotate(sum=Coalesce(Sum('amount'), 0.0))
+    income_data = [
+        {
+            'year': account['created_at__year'],
+            'month': account['created_at__month'],
+            'amount': account['sum']
+        } for account in user_input_accounts
+    ]
+
+    user_expenses_accounts = base_qs.filter(typ=AccountTypeChoices.OUTPUT).values(
+        'created_at__year', 'created_at__month', 'typ'
+    ).annotate(sum=Coalesce(Sum('amount'), 0.0))
+    expenses_data = [
+        {
+            'year': account['created_at__year'],
+            'month': account['created_at__month'],
+            'amount': account['sum']
+        } for account in user_expenses_accounts
+    ]
+
+    context = {
+        'income_data': income_data,
+        'expenses_data': expenses_data,
+    }
+    return Response(data=context, status=status.HTTP_200_OK)
+
+
 class ReminderModelViewSet(ModelViewSet, UserRelatedDataRestricted):
     queryset = ReminderService.all()
     serializer_class = ReminderModelBaseSerializer
