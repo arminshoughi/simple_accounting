@@ -9,7 +9,7 @@ from .. import models
 class AccountModelAdmin(BaseModelAdmin):
     list_per_page = 20
     search_fields = ('title',)
-    list_display = ('user', 'title', 'amount', 'typ', 'tag', 'is_draft')
+    list_display = ('user', 'title', 'amount', 'typ', 'tag', 'is_checked')
     list_filter = ('typ', 'tag')
 
 

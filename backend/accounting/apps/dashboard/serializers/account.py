@@ -15,7 +15,7 @@ class AccountModelBaseSerializer(DynamicFieldsModelSerializer):
         model = models.AccountModel
         service = AccountService
         fields = (
-            'user_id', 'user', 'title', 'description', 'amount', 'typ', 'tag', 'is_draft', 'draft_till'
+            'user_id', 'user', 'title', 'description', 'amount', 'typ', 'tag', 'is_checked'
         )
 
 

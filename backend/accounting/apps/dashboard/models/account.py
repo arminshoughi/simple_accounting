@@ -13,8 +13,7 @@ class AccountModel(models.Model):
     amount = models.FloatField(verbose_name='amount', null=False, blank=False)
     typ = models.CharField(verbose_name='type', choices=AccountTypeChoices.choices, max_length=10)
     tag = models.CharField(verbose_name='tag', choices=TagChoices.choices, max_length=30)
-    is_draft = models.BooleanField(verbose_name='is draft', default=False)
-    draft_till = models.DateField(verbose_name='draft till', null=True, blank=True)
+    is_checked = models.BooleanField(verbose_name='is checked\\\\\\\\', default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
