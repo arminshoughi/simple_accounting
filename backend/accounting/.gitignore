@@ -38,5 +38,5 @@ apps/accounting/extra/*
 .idea/
 
 # Database stuff
-*.sqlite3s
+*.sqlite3
 db.sqlite3
