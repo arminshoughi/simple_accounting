@@ -65,9 +65,9 @@ class UserModel(AbstractBaseUser, BaseModel):
     @property
     def inventory(self):
         input_amount = self.accounts.filter(
-            typ=AccountTypeChoices.INPUT, is_draft=False
+            typ=AccountTypeChoices.INPUT
         ).aggregate(sum=Coalesce(Sum('amount'), 0, output_field=FloatField()))["sum"]
         output_amount = self.accounts.filter(
-            typ=AccountTypeChoices.OUTPUT, is_draft=False
+            typ=AccountTypeChoices.OUTPUT
         ).aggregate(sum=Coalesce(Sum('amount'), 0, output_field=FloatField()))["sum"]
         return input_amount - output_amount
