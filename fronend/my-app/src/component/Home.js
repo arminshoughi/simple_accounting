@@ -26,7 +26,7 @@ ChartJS.register(
 
 const Home = () => {
   const a= useMaster()
-  console.log(a , "asdasdasd");
+  console.log(a , "ssssssas");
   const [data, setData] = useState({});
   const [diagramState, setDiagramState] = useState({});
 console.log(data ,"data")

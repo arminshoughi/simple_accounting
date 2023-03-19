@@ -30,8 +30,8 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-light" style={{backgroundColor: "#e3f2fd"}}>
         <div className="container-fluid px-md-5">
-        <button onClick={(e) => {fetch('/api/notifications/read_notifications')}} className="btn btn-outline-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-<HiBell/>
+        <button onClick={(e) => {fetch('/api/notifications/read_notifications')}} className="btn  position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+<HiBell className='text-yellow-400 w-7 first-letter:h-7'/>
         {notifications.filter(item => item.read === false).length !== 0 && 
         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           {notifications.filter(item => item.read === false).length}

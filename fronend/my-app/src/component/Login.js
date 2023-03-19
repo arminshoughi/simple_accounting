@@ -5,10 +5,11 @@ import { useLocation } from 'react-router-dom';
 
 const Login = () => {
     const [status, setStatus] = useState();
-    const [, setA] = useState();
+    const [a, setA] = useState();
     const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
-
+console.log(a , "asdasdasd")
+localStorage.setItem('access', a)
     const handleSubmit = (e) => {
       e.preventDefault();
       axios

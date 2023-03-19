@@ -6,7 +6,9 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import Expenses from './component/Expenses';
 import Home from './component/Home';
+import Incomes from './component/Incomes';
 import Login from './component/Login';
 import Navbar from './component/Navbar';
 
@@ -34,6 +36,10 @@ export const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/sighnin" element={<Sighnin />} />
+            <Route path="/incomes" element={<Incomes />} />
+            <Route path="/expenses" element={<Expenses />} />
+
+
 
 
             

@@ -11,8 +11,7 @@ export function useMaster() {
         headers: {
           "Content-Type": "application/json",
           accept: "application/json",
-          Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MDg5ODkyLCJqdGkiOiJjOTJhYzgxYjgwNTI0MTExYjNkZmY3NDdlMDNiMDhmNSIsInVzZXJfaWQiOjd9._8GBpkSm2qWhSi6mZ-rP2pC40YAgts6f1GWx48KxP2o' \
-          ",
+          Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MTUwMTQ4LCJqdGkiOiI5YmRkZWM1NGE0MTE0NjcxYjcxZGRkMWQ2ZDBlNTg0ZiIsInVzZXJfaWQiOjh9.dH-kTjAoeHiAxE4wfrJUr0MNJaDGsEFuwsA2NCt7CrQ",
           "X-CSRFToken":
             "gnu99yM7oNaRBL4Pjcs88CeWmxOWW55xf2lf1E7Hyzm4UlIZKCkYRI3RL9nTjwm5",
         },
