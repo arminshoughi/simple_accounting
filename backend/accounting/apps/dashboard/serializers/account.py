@@ -15,7 +15,7 @@ class AccountModelBaseSerializer(DynamicFieldsModelSerializer):
         model = models.AccountModel
         service = AccountService
         fields = (
-            'user_id', 'user', 'title', 'description', 'amount', 'typ', 'tag', 'is_checked'
+            'id', 'user_id', 'user', 'title', 'description', 'amount', 'typ', 'tag', 'is_checked'
         )
 
 
@@ -27,5 +27,5 @@ class ReminderModelBaseSerializer(DynamicFieldsModelSerializer):
         model = models.ReminderModel
         service = ReminderService
         fields = (
-            'user_id', 'user', 'title', 'description', 'amount', 'account_type', 'reminder_type', 'time_choice'
+            'id', 'user_id', 'user', 'title', 'description', 'amount', 'account_type', 'reminder_type', 'time_choice'
         )
