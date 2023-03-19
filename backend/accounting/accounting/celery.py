@@ -21,17 +21,3 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks(lambda: INSTALLED_APPS)
-
-
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {0!r}'.format(self.request))
-
-
-app.conf.beat_schedule = {
-    # Execute the Speed Test every 10 minutes
-    'network-speedtest-10min': {
-        'task': 'check_network_speed',
-        'schedule': crontab(minute='*/10'),
-    },
-}
