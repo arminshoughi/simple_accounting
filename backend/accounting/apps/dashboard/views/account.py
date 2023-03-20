@@ -41,23 +41,25 @@ def user_saving_amount_in_specific_month(request, year, month):
 def diagram_view(request):
     base_qs = AccountService.filter(user=request.user)
     user_input_accounts = base_qs.filter(typ=AccountTypeChoices.INPUT).values(
-        'created_at__year', 'created_at__month', 'typ'
+        'created_at__year', 'created_at__month', 'created_at__day', 'typ'
     ).annotate(sum=Coalesce(Sum('amount'), 0.0))
     income_data = [
         {
             'year': account['created_at__year'],
             'month': account['created_at__month'],
+            'day': account['created_at__day'],
             'amount': account['sum']
         } for account in user_input_accounts
     ]
 
     user_expenses_accounts = base_qs.filter(typ=AccountTypeChoices.OUTPUT).values(
-        'created_at__year', 'created_at__month', 'typ'
+        'created_at__year', 'created_at__month', 'created_at__day', 'typ'
     ).annotate(sum=Coalesce(Sum('amount'), 0.0))
     expenses_data = [
         {
             'year': account['created_at__year'],
             'month': account['created_at__month'],
+            'day': account['created_at__day'],
             'amount': account['sum']
         } for account in user_expenses_accounts
     ]
