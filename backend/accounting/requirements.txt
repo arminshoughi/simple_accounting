@@ -4,6 +4,8 @@ django-filter==21.1
 django-redis==5.2.0
 djangorestframework-simplejwt==4.4.0
 drf-yasg==1.21.3
+faker==17.6.0
 markdown==3.3.7
 pip-chill==1.0.1
 psycopg2==2.9.3
+tqdm==4.65.0
