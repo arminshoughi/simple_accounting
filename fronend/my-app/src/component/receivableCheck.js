@@ -163,7 +163,6 @@ const Receivablechecks = () => {
 
                                 
 
-                                <span >{new Date(income.date).toLocaleDateString("en-US")}</span>
                                 </div>
                             </li>
                 )}

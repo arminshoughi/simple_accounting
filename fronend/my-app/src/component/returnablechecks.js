@@ -153,7 +153,7 @@ const Returnablechecks = () => {
                         {data.filter(i =>i.typ === "input").filter(i => i.is_checked !== false).map(income => 
                             <li key={income.id} className="list-group-item">
                                 <div className=" d-flex">
-                                <button onClick={()=> handleDelete(income.id)} className=' me-4 btn btn-danger btn-sm'><i className="bi bi-trash"></i></button>
+                                <button onClick={()=> handleDelete(income.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
                                 <span className="fw-bold me-auto text-success">{ income.amount.toLocaleString() }$</span>
                                 <span className="fw-bold me-auto text-success">{ income.description } </span>
                                 <span className="fw-bold me-auto text-success">{ income.title } </span>
@@ -161,7 +161,6 @@ const Returnablechecks = () => {
 
                                 
 
-                                <span >{new Date(income.date).toLocaleDateString("en-US")}</span>
                                 </div>
                             </li>
                 )}

@@ -151,7 +151,7 @@ console.log(data , "sdasdasd");
                         {data.filter(i =>i.typ === "output").filter(i => i.is_checked !== true).map(income => 
                             <li key={income.id} className="list-group-item">
                                 <div className=" d-flex">
-                                <button onClick={()=> { handleDelete(income.id)
+                                <button onClick={()=> {handleDelete(income.id)
                                 }} className=' me-4 btn btn-danger btn-sm'>delete<i className="bi bi-trash"></i></button>
                                 <span className="fw-bold me-auto text-success">{ income.amount.toLocaleString() }$</span>
                                 <span className="fw-bold me-auto text-success">{ income.description } </span>
@@ -160,7 +160,6 @@ console.log(data , "sdasdasd");
 
                                 
 
-                                <span >{new Date(income.date).toLocaleDateString("en-US")}</span>
                                 </div>
                             </li>
                 )}
