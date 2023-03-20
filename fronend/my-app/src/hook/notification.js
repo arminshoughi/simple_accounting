@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export function useMaster() {
+export function useNotification() {
   const [collages, setData] = useState([]);
-  console.log("npm i axios")
   const access = localStorage.getItem('access')
+
 
   const getData = () => {
     axios
-      .get('http://127.0.0.1:8000/api/dashboard/account/' , {
+      .get('http://127.0.0.1:8000/api/dashboard/account/notifications/', {
         headers: {
           "Content-Type": "application/json",
           accept: "application/json",
@@ -36,7 +36,6 @@ export function useMaster() {
   }, []);
 
   const data = React.useMemo(() => collages, [collages]);
-console.log(data , "Asdasdasdxx")
   return {
     data,
   };

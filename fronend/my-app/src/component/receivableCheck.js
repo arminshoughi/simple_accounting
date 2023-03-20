@@ -7,23 +7,24 @@ import { useMaster } from '../hook/incomes';
  
 
 
-const Incomes = () => {
+const Receivablechecks = () => {
   const [incomes, setIncomes] = useState([]);
   const [ordering, setOrdering] = useState('-date');
   const access = localStorage.getItem('access')
   const [title, setTitle] = useState();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState();
-  const [delete1, setDelete] = useState();
 
   const [tag, setTag] = useState();
 
   const {data}= useMaster()
   const {data:current}= useCurrent()
-console.log(data , "sdasdasd");
+
+  console.log(data, "sssasdasdsssas");
     useEffect(() => {
         fetch(`/api/incomes/?ordering=${ordering}`).then(res => res.json()).then(res => { setIncomes(res)});
     }, [ordering]);
+
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -32,11 +33,11 @@ console.log(data , "sdasdasd");
            "http://127.0.0.1:8000/api/dashboard/account/",
           {
             user_id: current.id,
-  is_checked:"false",
-
   title: title,
   description: description,
   amount: amount,
+  is_checked:"true",
+
   typ: "output",
   tag:tag,
           },
@@ -52,16 +53,20 @@ console.log(data , "sdasdasd");
           }
         )
         .then((result) => {
-          })
+         console.log("asdasdd")
+        })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
         });
       localStorage.setItem("flag", "true");
     };
+
+ 
+
     const handleDelete = (e) => {
       axios 
         .delete(
-           `http://127.0.0.1:8000/api/dashboard/account/${11}/`,
+           `http://127.0.0.1:8000/api/dashboard/account/${e}/`,
          
           {
 
@@ -81,17 +86,16 @@ console.log(data , "sdasdasd");
         });
       localStorage.setItem("flag", "true");
     };
-  
 
 
   return (
     <div className='p-4'>
-      <h1>Expenses</h1>
+      <h1>Returnable Checks</h1>
       <div className='row'>
           <div className='col-12 my-4'>
             <div className="card">
                 <div className="card-header">
-                    New Expenses
+                    New Returnable Checks
                 </div>
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -101,13 +105,13 @@ console.log(data , "sdasdasd");
                              onChange={(e) => setTitle(e.target.value)}
                         
                         
-                             name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                            name="amount" className="form-control" id="amount" placeholder="Enter amount" />
                             <label htmlFor="amount">Amount</label>
                             <input 
-                             onChange={(e) => setAmount(e.target.value)} name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                             onChange={(e) => setAmount(e.target.value)} type="number" name="amount" className="form-control" id="amount" placeholder="Enter amount" />
                         <label htmlFor="amount">description</label>
                             <input 
-                             onChange={(e) => setDescription(e.target.value)} name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                             onChange={(e) => setDescription(e.target.value)}  name="amount" className="form-control" id="amount" placeholder="Enter amount" />
                        
                         </div>
                         <label htmlFor="amount">tag</label>
@@ -133,7 +137,7 @@ console.log(data , "sdasdasd");
           <div className='col-12'>
               <div className='card'>
                     <div className='card-header d-flex'>
-                    Expenses
+                    Returnable Checks
                         
                         <div className="input-group mb-3 w-25 ms-auto">
         <span className="input-group-text" id="basic-addon1"><i className="bi bi-sort-up"></i></span>
@@ -148,11 +152,10 @@ console.log(data , "sdasdasd");
                     </div>
                     <div className='card-body'>
                   <ul className="list-group">
-                        {data.filter(i =>i.typ === "output").filter(i => i.is_checked !== true).map(income => 
+                        {data.filter(i =>i.typ === "output").filter(i => i.is_checked !== false).map(income => 
                             <li key={income.id} className="list-group-item">
                                 <div className=" d-flex">
-                                <button onClick={()=> { handleDelete(income.id)
-                                }} className=' me-4 btn btn-danger btn-sm'>delete<i className="bi bi-trash"></i></button>
+                                <button onClick={()=> handleDelete(income.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
                                 <span className="fw-bold me-auto text-success">{ income.amount.toLocaleString() }$</span>
                                 <span className="fw-bold me-auto text-success">{ income.description } </span>
                                 <span className="fw-bold me-auto text-success">{ income.title } </span>
@@ -176,4 +179,4 @@ console.log(data , "sdasdasd");
   )
 }
 
-export default Incomes
+export default Receivablechecks

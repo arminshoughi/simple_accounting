@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { HiBell } from "react-icons/hi";
+import { useNotification } from '../hook/notification'
 
 const Navbar = () => {
   const location = useLocation();
@@ -27,11 +28,13 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
+const{data} = useNotification()
+
   return (
     <nav className="navbar navbar-light" style={{backgroundColor: "#e3f2fd"}}>
         <div className="container-fluid px-md-5">
-        <button onClick={(e) => {fetch('/api/notifications/read_notifications')}} className="btn  position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-<HiBell className='text-yellow-400 w-7 first-letter:h-7'/>
+        <button  className="btn  position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+<HiBell className='text-yellow-400 first-letter:h-7 w-8 h-8'/>
         {notifications.filter(item => item.read === false).length !== 0 && 
         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           {notifications.filter(item => item.read === false).length}
@@ -45,7 +48,7 @@ const Navbar = () => {
      
   </div>
   <ul className="list-group">
-    {notifications.map(item => <li key={item.id} className="list-group-item d-flex justify-content-between align-items-start">
+    {data.map(item => <li key={item.id} className="list-group-item d-flex justify-content-between align-items-start">
     <div className="ms-2 me-auto">
       <div className={!item.read && "fw-bold" || "text-muted"}>{item.message}</div>
     </div>

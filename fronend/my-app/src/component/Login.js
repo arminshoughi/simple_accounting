@@ -29,6 +29,7 @@ localStorage.setItem('access', a)
         .then((result) => {
           setStatus(result.status.toString());
           setA(result.data.access.toString());
+          window.location.href = "/"
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
