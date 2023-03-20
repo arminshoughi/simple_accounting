@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -33,6 +35,10 @@ class ReminderModel(models.Model):
     account_type = models.CharField(verbose_name='account type', choices=AccountTypeChoices.choices, max_length=10)
     reminder_type = models.CharField(verbose_name='reminder type', choices=ReminderTypeChoices.choices, max_length=10)
     time_choice = models.CharField(verbose_name='time choice', choices=ReminderTimeTypeChoices.choices, max_length=20)
+    reminding_time = models.DateField(
+        verbose_name='reminding time', blank=False, null=False, default=datetime.now().date()
+    )
+    is_visible = models.BooleanField(verbose_name='is visible', default=False)
     created_at = models.DateField(auto_now_add=True)
 
     class Meta:
