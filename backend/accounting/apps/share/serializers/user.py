@@ -18,8 +18,8 @@ class UserBaseSerializer(DynamicFieldsModelSerializer):
             'national_code',
             'birthday',
             'sex',
-            'input_amount'
-            'expenses_amount'
+            'input_amount',
+            'expenses_amount',
             'inventory'
         ]
 
