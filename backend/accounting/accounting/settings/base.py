@@ -171,7 +171,7 @@ CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BEAT_SCHEDULE = {
     "check_reminders": {
-        "task": "apps.dashboard.tasks.check_reminder",
+        "task": "apps.dashboard.tasks.check_reminders",
         "schedule": timedelta(seconds=5)
     },
 }

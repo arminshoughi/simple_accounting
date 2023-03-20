@@ -74,9 +74,8 @@ def diagram_view(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def notification_view(request):
-    reminder_show_qs = ReminderService.filter(user=request.user, is_show=True)
-    serializer = ReminderModelBaseSerializer(data=reminder_show_qs, many=True)
-    serializer.is_valid(raise_exception=True)
+    reminder_show_qs = ReminderService.filter(user=request.user, is_visible=True)
+    serializer = ReminderModelBaseSerializer(reminder_show_qs, many=True)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
