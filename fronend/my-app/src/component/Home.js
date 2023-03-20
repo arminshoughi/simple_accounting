@@ -74,7 +74,7 @@ const Home = () => {
           <div className="card text-white bg-primary mb-3">
             <div className="card-header">this mounth Income</div>
             <div className="card-body">
-              <h2 className="card-title">{data.total_income && data.total_income.toLocaleString() || 0} $</h2>
+              <h2 className="card-title">{current.input_amount} $</h2>
               
             </div>
           </div>
@@ -93,7 +93,7 @@ const Home = () => {
           <div className="card text-white bg-danger mb-3">
             <div className="card-header">this mounth Expenses</div>
             <div className="card-body">
-              <h2>{data.total_expense && data.total_expense.toLocaleString() || 0} $</h2>
+              <h2>{current.expenses_amount} $</h2>
             </div>
           </div>
         </div>
