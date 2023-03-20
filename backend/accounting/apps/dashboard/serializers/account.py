@@ -28,5 +28,5 @@ class ReminderModelBaseSerializer(DynamicFieldsModelSerializer):
         service = ReminderService
         fields = (
             'id', 'user_id', 'user', 'title', 'description', 'amount', 'account_type', 'reminder_type', 'time_choice',
-            'reminding_time', 'is_visible', 'created_at'
+            'reminding_time', 'created_at'
         )
