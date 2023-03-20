@@ -1,8 +1,8 @@
 MALE = 'Male'
-Female = 'Female'
+FEMALE = 'Female'
 SEX_TYPE_CHOICES = (
     (MALE, 'Male'),
-    (Female, 'Female')
+    (FEMALE, 'Female')
 )
 
 
