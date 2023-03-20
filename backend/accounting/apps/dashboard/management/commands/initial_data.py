@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.management.base import BaseCommand
 
 from apps.dashboard.consts import AccountTypeChoices, TagChoices, ReminderTypeChoices, ReminderTimeTypeChoices
@@ -41,28 +43,33 @@ class Command(BaseCommand):
 
         print('adding 100 income for hoori')
         for i in tqdm(range(100)):
-            AccountService.create(
+            obj = AccountService.create(
                 user=user,
                 title=self.faker.name(),
                 description=self.faker.text(),
                 amount=self.faker.random.randint(100, 9999999),
                 typ=AccountTypeChoices.INPUT,
-                tag=self.faker.random.choice(TagChoices.choices),
-                is_checked=self.faker.boolean()
+                tag=self.faker.random.choice(TagChoices.choices)[0],
+                is_checked=self.faker.boolean(),
+                created_at=self.faker.date()
             )
+            obj.created_at = self.faker.date()
+            obj.save()
         self.stdout.write(self.style.SUCCESS(f"SUCCESSFULLY ADDED ;)"))
 
         print('adding 100 output for hoori')
         for i in tqdm(range(100)):
-            AccountService.create(
+            obj = AccountService.create(
                 user=user,
                 title=self.faker.name(),
                 description=self.faker.text(),
                 amount=self.faker.random.randint(100, 9999999),
                 typ=AccountTypeChoices.OUTPUT,
-                tag=self.faker.random.choice(TagChoices.choices),
+                tag=self.faker.random.choice(TagChoices.choices)[0],
                 is_checked=self.faker.boolean()
             )
+            obj.created_at = self.faker.date()
+            obj.save()
         self.stdout.write(self.style.SUCCESS(f"SUCCESSFULLY ADDED ;)"))
 
         print('adding 100 reminder for hoori')
@@ -72,9 +79,22 @@ class Command(BaseCommand):
                 title=self.faker.name(),
                 description=self.faker.text(),
                 amount=self.faker.random.randint(100, 9999999),
-                account_type=self.faker.random.choice(AccountTypeChoices.choices),
-                reminder_type=self.faker.random.choice(ReminderTypeChoices.choices),
-                time_choice=self.faker.random.choice(ReminderTimeTypeChoices.choices),
+                account_type=self.faker.random.choice(AccountTypeChoices.choices)[0],
+                reminder_type=self.faker.random.choice(ReminderTypeChoices.choices)[0],
+                time_choice=self.faker.random.choice(ReminderTimeTypeChoices.choices)[0],
                 reminding_time=self.faker.date(),
             )
         self.stdout.write(self.style.SUCCESS(f"SUCCESSFULLY ADDED ;)"))
+
+        print('add ten reminder for today')
+        for i in tqdm(range(10)):
+            ReminderService.create(
+                user=user,
+                title=self.faker.name(),
+                description=self.faker.text(),
+                amount=self.faker.random.randint(100, 9999999),
+                account_type=self.faker.random.choice(AccountTypeChoices.choices)[0],
+                reminder_type=self.faker.random.choice(ReminderTypeChoices.choices)[0],
+                time_choice=ReminderTimeTypeChoices.ONE_DAY_BEFORE.value,
+                reminding_time=datetime.datetime.now().date() + datetime.timedelta(days=1),
+            )
