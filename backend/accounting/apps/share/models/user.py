@@ -63,11 +63,17 @@ class UserModel(AbstractBaseUser, BaseModel):
         return self.is_superuser
 
     @property
-    def inventory(self):
-        input_amount = self.accounts.filter(
+    def input_amount(self):
+        return self.accounts.filter(
             typ=AccountTypeChoices.INPUT
         ).aggregate(sum=Coalesce(Sum('amount'), 0, output_field=FloatField()))["sum"]
-        output_amount = self.accounts.filter(
+
+    @property
+    def expenses_amount(self):
+        return self.accounts.filter(
             typ=AccountTypeChoices.OUTPUT
         ).aggregate(sum=Coalesce(Sum('amount'), 0, output_field=FloatField()))["sum"]
-        return input_amount - output_amount
+
+    @property
+    def inventory(self):
+        return self.input_amount - self.expenses_amount
