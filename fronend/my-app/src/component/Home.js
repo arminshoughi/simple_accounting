@@ -1,6 +1,8 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +13,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useSearchParams } from 'react-router-dom';
-import { useMaster } from '../hook/incomes';
+import { useCurrent } from '../hook/current';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,25 +27,25 @@ ChartJS.register(
 
 
 const Home = () => {
-  const a= useMaster()
-  console.log(a , "ssssssas");
   const [data, setData] = useState({});
   const [diagramState, setDiagramState] = useState({});
-console.log(data ,"data")
+  const [qs, setQs] = useSearchParams();
+  const {data:current}= useCurrent()
+
   const setDiagramData = (dataPram) => {
     const diagramData = {
-      labels: dataPram.expenses.map(item => Object.keys(item)[0]),
+      labels: dataPram.map(item => item),
       datasets: [
         {
           label: 'Expenses',
-          data: dataPram.expenses.map(item => (Object.values(item)[0] || 0)),
+          data: dataPram.map(item => (item)),
           borderColor: 'rgb(255, 99, 132)',
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
     
         },
         {
           label: 'Incomes',
-          data: dataPram.incomes.map(item => (Object.values(item)[0] || 0)),
+          data: [7,8].map(item => item),
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }
@@ -56,10 +58,12 @@ console.log(data ,"data")
 
 
   useEffect(() => {
-  
-    fetch(`/api/dashboard/account/`).then(res => res.json()).then(res => { setData(res) });
+    const date = qs.get('date') || "month";
+    console.log(date);
+    setDiagramData([1, 3 , 4]);
+    fetch(`/api/dashboard/data/?date_range=${date}`).then(res => res.json()).then(res => { setData(res) });
     
-  }, []);
+  }, [qs]);
 
 
   return (
@@ -68,7 +72,7 @@ console.log(data ,"data")
       <div className='row p-4'>
         <div className='col-6 col-md-3'>
           <div className="card text-white bg-primary mb-3">
-            <div className="card-header">Total Income</div>
+            <div className="card-header">this mounth Income</div>
             <div className="card-body">
               <h2 className="card-title">{data.total_income && data.total_income.toLocaleString() || 0} $</h2>
               
@@ -77,24 +81,17 @@ console.log(data ,"data")
         </div>
         <div className='col-6 col-md-3'>
           <div className="card text-white bg-success mb-3">
-            <div className="card-header">Total Savings</div>
+            <div className="card-header">this mounth Savings</div>
             <div className="card-body">
-              <h2 className="card-title">{data.total_saving && data.total_saving.toLocaleString() || 0 } $</h2>
+              <h2 className="card-title">{current.inventory || 0 } $</h2>
             </div>
           </div>
         </div>
-        <div className='col-6 col-md-3'>
-          <div className="card text-white bg-warning mb-3">
-            <div className="card-header">Total Checks</div>
-            <div className="card-body">
-              <h2>{data.total_check && data.total_check.toLocaleString() || 0 } $</h2>
-            </div>
-          </div>
-        </div>
+       
         
         <div className='col-6 col-md-3'>
           <div className="card text-white bg-danger mb-3">
-            <div className="card-header">Total Expenses</div>
+            <div className="card-header">this mounth Expenses</div>
             <div className="card-body">
               <h2>{data.total_expense && data.total_expense.toLocaleString() || 0} $</h2>
             </div>

@@ -3,42 +3,48 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useCurrent } from '../hook/current';
 import { useMaster } from '../hook/incomes';
+import { useReminder } from '../hook/reminder';
 
  
 
 
-const Incomes = () => {
+const Reminder = () => {
   const [incomes, setIncomes] = useState([]);
   const [ordering, setOrdering] = useState('-date');
   const access = localStorage.getItem('access')
   const [title, setTitle] = useState();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState();
-  const [delete1, setDelete] = useState();
+  const [timeChioce, setTimeChoice] = useState();
 
-  const [tag, setTag] = useState();
+  const [accountType, setAccountType] = useState();
+  const [reminderType, setReminderType] = useState();
+  const [reminderTime, setReminderTime] = useState();
 
-  const {data}= useMaster()
+  
+  const {data}= useReminder()
   const {data:current}= useCurrent()
-console.log(data , "sdasdasd");
+
+  console.log(data, "sssasdasdsssas");
     useEffect(() => {
         fetch(`/api/incomes/?ordering=${ordering}`).then(res => res.json()).then(res => { setIncomes(res)});
     }, [ordering]);
+
 
     const handleSubmit = (e) => {
       e.preventDefault();
       axios 
         .post(
-           "http://127.0.0.1:8000/api/dashboard/account/",
+           "http://127.0.0.1:8000/api/dashboard/account/reminder/",
           {
             user_id: current.id,
-  is_checked:"false",
-
   title: title,
   description: description,
   amount: amount,
-  typ: "output",
-  tag:tag,
+  account_type:  !!accountType ?accountType :"input",
+  reminder_type:!!reminderType ?reminderType :"check",
+  time_choice:!!timeChioce ? timeChioce :"one day before" ,
+  reminding_time:reminderTime,
           },
           {
 
@@ -52,16 +58,18 @@ console.log(data , "sdasdasd");
           }
         )
         .then((result) => {
-          })
+         console.log("asdasdd")
+        })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
         });
       localStorage.setItem("flag", "true");
     };
+
     const handleDelete = (e) => {
       axios 
         .delete(
-           `http://127.0.0.1:8000/api/dashboard/account/${11}/`,
+           `http://127.0.0.1:8000/api/dashboard/account/reminder/${e}/`,
          
           {
 
@@ -81,17 +89,16 @@ console.log(data , "sdasdasd");
         });
       localStorage.setItem("flag", "true");
     };
+
   
-
-
   return (
     <div className='p-4'>
-      <h1>Expenses</h1>
+      <h1>Reminder</h1>
       <div className='row'>
           <div className='col-12 my-4'>
             <div className="card">
                 <div className="card-header">
-                    New Expenses
+                    New Reminder
                 </div>
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -101,30 +108,40 @@ console.log(data , "sdasdasd");
                              onChange={(e) => setTitle(e.target.value)}
                         
                         
-                             name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                            name="amount" className="form-control" id="amount" placeholder="Enter amount" />
                             <label htmlFor="amount">Amount</label>
                             <input 
-                             onChange={(e) => setAmount(e.target.value)} name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                             onChange={(e) => setAmount(e.target.value)} type="number" name="amount" className="form-control" id="amount" placeholder="Enter amount" />
                         <label htmlFor="amount">description</label>
                             <input 
-                             onChange={(e) => setDescription(e.target.value)} name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                             onChange={(e) => setDescription(e.target.value)}  name="amount" className="form-control" id="amount" placeholder="Enter amount" />
                        
                         </div>
-                        <label htmlFor="amount">tag</label>
-                        <select value={tag} onChange={(e) => setTag(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
-                            <option value="food">food</option>
-                            <option value="dress">dress</option>
-                            <option value="bill">bill</option>
-                            <option value="rent">rent</option>
-                            <option value="leon">leon</option>
-                            <option value="salary">salary</option>
-                            <option value="cars and accessories">cars and accessories</option>
-                            <option value="payment to other"> payment to other</option>
-                            <option value="service">service</option>
-                            <option value="health">health</option>
-                            <option value="other">other</option>
+                        <label htmlFor="amount">account type</label>
+                        <select value={accountType} onChange={(e) => setAccountType(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
+                            <option value="input">input</option>
+                            <option value="output">output</option>
+                           
+                        </select>
+                        <label htmlFor="amount">reminder type</label>
+                        <select value={reminderType} onChange={(e) => setReminderType(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
+                            <option value="check">check</option>
+                            <option value="debt">debt</option>
+                           
+                        </select>
+                        <label htmlFor="amount">time choice</label>
+                        <select defaultValue={"one day before"} value={timeChioce} onChange={(e) => setTimeChoice(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
+                            <option value="one day before">one day before</option>
+                            <option value="two day before">two day before</option>
+                            <option value="three day before">three day before</option>
+                            <option value="week before">week before</option>
+                            <option value="month before">month before</option>
 
                         </select>
+                        <label htmlFor="amount">reminding time</label>
+                            <input 
+                             onChange={(e) => setReminderTime(e.target.value)} type="date" name="amount" className="form-control" id="amount" placeholder="Enter amount" />
+                      
                         <button type="submit" className='m-2 btn btn-outline-primary'>submit</button>
                     </form>
                 </div>
@@ -133,30 +150,22 @@ console.log(data , "sdasdasd");
           <div className='col-12'>
               <div className='card'>
                     <div className='card-header d-flex'>
-                    Expenses
+                        Reminder
                         
                         <div className="input-group mb-3 w-25 ms-auto">
-        <span className="input-group-text" id="basic-addon1"><i className="bi bi-sort-up"></i></span>
-                        <select value={ordering} onChange={(e) => setOrdering(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
-                            <option value="-date">Date Ascending</option>
-                            <option value="date">Date Descending</option>
-                            <option value="-amount">Amount Ascending</option>
-                            <option value="amount">Amount Descending</option>
-                        </select>
+                     
                         
                         </div>
                     </div>
                     <div className='card-body'>
                   <ul className="list-group">
-                        {data.filter(i =>i.typ === "output").filter(i => i.is_checked !== true).map(income => 
+                        {data.map(income => 
                             <li key={income.id} className="list-group-item">
                                 <div className=" d-flex">
-                                <button onClick={()=> { handleDelete(income.id)
-                                }} className=' me-4 btn btn-danger btn-sm'>delete<i className="bi bi-trash"></i></button>
+                                <button onClick={()=> handleDelete(income.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
                                 <span className="fw-bold me-auto text-success">{ income.amount.toLocaleString() }$</span>
                                 <span className="fw-bold me-auto text-success">{ income.description } </span>
                                 <span className="fw-bold me-auto text-success">{ income.title } </span>
-                                <span className="fw-bold me-auto text-success">{ income.tag} </span>
 
                                 
 
@@ -176,4 +185,4 @@ console.log(data , "sdasdasd");
   )
 }
 
-export default Incomes
+export default Reminder

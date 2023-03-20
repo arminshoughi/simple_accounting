@@ -11,10 +11,12 @@ const Sighnin = () => {
     const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
     const [first_name, setFirst_name] = useState();
+
     const [last_name, setLast_name] = useState();
     const [birthday, setBirthday] = useState();
     const [national_code, setNational_code] = useState();
     const [sex, setSex] = useState();
+localStorage.setItem('access', a)
     const handleSubmit = (e) => {
       e.preventDefault();
       axios
@@ -39,7 +41,7 @@ const Sighnin = () => {
         .then((result) => {
           setStatus(result.status.toString());
           setA(result.data.access.toString());
-          console.log("ASdasdasd")
+        window.location.href = "/"
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
