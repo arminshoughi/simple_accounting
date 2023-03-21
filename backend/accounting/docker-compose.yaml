@@ -42,7 +42,7 @@ services:
   worker:
     build: .
     restart: always
-    command: celery -A accounting worker --loglevel=INFO
+    command: celery -A accounting worker -l info -B
     volumes:
       - .:/code
     depends_on:

@@ -14,7 +14,7 @@ class BaseService:
     @classmethod
     def truncate(cls):
         with connection.cursor() as cursor:
-            cursor.execute('TRUNCATE TABLE "{0}" CASCADE'.format(cls.model._meta.db_table))
+            cursor.execute(f'TRUNCATE TABLE {cls.model._meta.db_table} CASCADE')
 
     @classmethod
     def get(cls, **kwargs):

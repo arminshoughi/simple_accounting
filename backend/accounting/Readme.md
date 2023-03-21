@@ -2,7 +2,7 @@
 
 To creating main database for project, do following steps:
 
-```bash
+```shell script
 $ sudo su - postgres
 $ psql
 
@@ -18,7 +18,7 @@ exit;
 And for test database, we should create a database `bonyadehsan_testdb` and give proper
 access to it's user `bonyadehsan_testuser` to be able to also create database.
 
-```
+```shell script
 $ sudo su - postgres
 $ psql
 
@@ -30,4 +30,9 @@ ALTER ROLE bonyadehsan_testuser SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE bonyadehsan_testdb TO bonyadehsan_testuser;
 ALTER USER bonyadehsan_testuser CREATEDB;
 \q
+```
+
+and for run it with docker use following command:
+```dockerfile
+    docker-compose up -d
 ```
