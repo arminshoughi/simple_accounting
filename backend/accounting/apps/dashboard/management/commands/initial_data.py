@@ -24,9 +24,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options['clear']:
-            UserService.all().delete()
-            AccountService.all().delete()
-            ReminderService.all().delete()
+            UserService.truncate()
+            AccountService.truncate()
+            ReminderService.truncate()
             self.stdout.write(self.style.SUCCESS(f"SUCCESSFULLY CLEARED ;)"))
 
         user = UserService.create_user(
@@ -47,7 +47,7 @@ class Command(BaseCommand):
                 user=user,
                 title=self.faker.name(),
                 description=self.faker.text(),
-                amount=self.faker.random.randint(100, 9999999),
+                amount=self.faker.random.randint(9000000, 9999999),
                 typ=AccountTypeChoices.INPUT,
                 tag=self.faker.random.choice(TagChoices.choices)[0],
                 is_checked=self.faker.boolean(),
@@ -63,10 +63,27 @@ class Command(BaseCommand):
                 user=user,
                 title=self.faker.name(),
                 description=self.faker.text(),
-                amount=self.faker.random.randint(100, 9999999),
+                amount=self.faker.random.randint(7000000, 7999999),
                 typ=AccountTypeChoices.OUTPUT,
                 tag=self.faker.random.choice(TagChoices.choices)[0],
                 is_checked=self.faker.boolean()
+            )
+            obj.created_at = self.faker.date()
+            obj.save()
+        self.stdout.write(self.style.SUCCESS(f"SUCCESSFULLY ADDED ;)"))
+
+        print('adding 100 draft output for hoori')
+        for i in tqdm(range(100)):
+            obj = AccountService.create(
+                user=user,
+                title=self.faker.name(),
+                description=self.faker.text(),
+                amount=self.faker.random.randint(7000000, 7999999),
+                typ=AccountTypeChoices.OUTPUT,
+                tag=self.faker.random.choice(TagChoices.choices)[0],
+                is_checked=self.faker.boolean(),
+                is_draft=True
+
             )
             obj.created_at = self.faker.date()
             obj.save()
