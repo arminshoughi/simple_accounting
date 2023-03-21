@@ -85,7 +85,7 @@ DATABASES = {
         "NAME": 'accounting_db',
         "USER": 'accounting_user',
         "PASSWORD": 'accounting_password@',
-        "HOST": 'localhost',
+        "HOST": 'localhost' if not os.environ.get('DB_HOST', None) else 'db',
         "PORT": '5432',
     }
 }
