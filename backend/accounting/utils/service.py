@@ -1,4 +1,4 @@
-from django.db import IntegrityError
+from django.db import IntegrityError, connection
 from django.db.models import ProtectedError
 from django.utils import timezone
 
@@ -10,6 +10,11 @@ class BaseService:
 
     def __init__(self, model):
         self.model = model
+
+    @classmethod
+    def truncate(cls):
+        with connection.cursor() as cursor:
+            cursor.execute(f'TRUNCATE TABLE {cls.model._meta.db_table} CASCADE')
 
     @classmethod
     def get(cls, **kwargs):

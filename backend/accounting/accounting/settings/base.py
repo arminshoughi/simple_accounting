@@ -79,17 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'accounting.wsgi.application'
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'accounting_db',
-        "USER": 'accounting_user',
-        "PASSWORD": 'accounting_password@',
-        "HOST": 'localhost',
-        "PORT": '5432',
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
