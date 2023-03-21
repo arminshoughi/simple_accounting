@@ -24,9 +24,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options['clear']:
-            UserService.truncate()
-            AccountService.truncate()
-            ReminderService.truncate()
+            UserService.all().delete()
+            AccountService.all().delete()
+            ReminderService.all().delete()
             self.stdout.write(self.style.SUCCESS(f"SUCCESSFULLY CLEARED ;)"))
 
         user = UserService.create_user(
