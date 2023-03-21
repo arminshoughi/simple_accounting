@@ -62,7 +62,7 @@ const Save = () => {
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
                     <label htmlFor="amount">year</label>
-                        <select value={tag} onChange={(e) => setTYear(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
+                        <select value={year} onChange={(e) => setTYear(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
                             <option value="2010">2010</option>
                             <option value="2011">2011</option>
                             <option value="2012">2012</option>
@@ -87,7 +87,7 @@ const Save = () => {
 
                         </select>
                         <label htmlFor="amount">mounth</label>
-                        <select value={tag} onChange={(e) => setMounth(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
+                        <select value={mounth} onChange={(e) => setMounth(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
                             <option value="1">January</option>
                             <option value="2">February</option>
                             <option value="3">March</option>
