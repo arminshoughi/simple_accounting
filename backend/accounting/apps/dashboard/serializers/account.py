@@ -19,6 +19,22 @@ class AccountModelBaseSerializer(DynamicFieldsModelSerializer):
         )
 
 
+class DraftAccountModelBaseSerializer(AccountModelBaseSerializer):
+    class Meta(AccountModelBaseSerializer.Meta):
+        model = models.AccountModel
+        service = AccountService
+        fields = (
+            'id', 'user_id', 'user', 'title', 'description', 'amount', 'typ', 'tag', 'is_checked', 'created_at'
+        )
+
+    def save(self, **kwargs):
+        if self.instance:
+            self.instance.is_draft = True
+        else:
+            kwargs.update({'is_draft': True})
+        super(DraftAccountModelBaseSerializer, self).save(**kwargs)
+
+
 class ReminderModelBaseSerializer(DynamicFieldsModelSerializer):
     user_id = serializers.IntegerField(write_only=True)
     user = UserRegisterSerializer(read_only=True)

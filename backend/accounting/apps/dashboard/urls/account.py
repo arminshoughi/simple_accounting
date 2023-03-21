@@ -2,10 +2,11 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from apps.dashboard.views import AccountModelViewSet, ReminderModelViewSet, user_saving_amount_in_specific_month, \
-    diagram_view, notification_view
+    diagram_view, notification_view, DraftAccountModelViewSet
 
 router = DefaultRouter()
 router.register('reminder', ReminderModelViewSet, basename='reminder')
+router.register('draft', DraftAccountModelViewSet, basename='draft')
 router.register('', AccountModelViewSet, basename='account')
 
 urlpatterns = [

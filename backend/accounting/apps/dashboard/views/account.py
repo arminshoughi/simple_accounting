@@ -8,7 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from apps.dashboard.consts import AccountTypeChoices
-from apps.dashboard.serializers import AccountModelBaseSerializer, ReminderModelBaseSerializer
+from apps.dashboard.serializers import AccountModelBaseSerializer, ReminderModelBaseSerializer, \
+    DraftAccountModelBaseSerializer
 from apps.dashboard.services import AccountService, ReminderService
 from rest_framework.viewsets import ModelViewSet
 
@@ -18,6 +19,12 @@ from utils.viewsets import UserRelatedDataRestricted
 class AccountModelViewSet(ModelViewSet, UserRelatedDataRestricted):
     queryset = AccountService.all()
     serializer_class = AccountModelBaseSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class DraftAccountModelViewSet(ModelViewSet, UserRelatedDataRestricted):
+    queryset = AccountService.filter(is_draft=True)
+    serializer_class = DraftAccountModelBaseSerializer
     permission_classes = [IsAuthenticated]
 
 

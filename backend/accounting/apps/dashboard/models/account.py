@@ -15,6 +15,7 @@ class AccountModel(models.Model):
     typ = models.CharField(verbose_name='type', choices=AccountTypeChoices.choices, max_length=10)
     tag = models.CharField(verbose_name='tag', choices=TagChoices.choices, max_length=30)
     is_checked = models.BooleanField(verbose_name='is checked', default=False)
+    is_draft = models.BooleanField(verbose_name='is draft', default=False)
     created_at = models.DateField(auto_now_add=True)
 
     class Meta:
