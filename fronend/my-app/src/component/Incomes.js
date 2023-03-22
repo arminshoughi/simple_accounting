@@ -137,32 +137,58 @@ const Incomes = () => {
                         Incomes
                         
                         <div className="input-group mb-3 w-25 ms-auto">
-        <span className="input-group-text" id="basic-addon1"><i className="bi bi-sort-up"></i></span>
-                        <select value={ordering} onChange={(e) => setOrdering(e.target.value)} className="form-select form-select-lg" aria-label=".form-select-lg example">
-                            <option value="-date">Date Ascending</option>
-                            <option value="date">Date Descending</option>
-                            <option value="-amount">Amount Ascending</option>
-                            <option value="amount">Amount Descending</option>
-                        </select>
+                     
                         
                         </div>
                     </div>
                     <div className='card-body'>
-                  <ul className="list-group">
-                        {data.filter(i =>i.typ === "input").filter(i => i.is_checked !== true).map(income => 
-                            <li key={income.id} className="list-group-item">
-                                <div className=" d-flex">
-                                <button onClick={()=> handleDelete(income.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
-                                <span className="fw-bold me-auto text-success">{ income.amount.toLocaleString() }$</span>
-                                <span className="fw-bold me-auto text-success">{ income.description } </span>
-                                <span className="fw-bold me-auto text-success">{ income.title } </span>
-                                <span className="fw-bold me-auto text-success">{ income.tag} </span>
+                  <ul className="list-group ">
+                  <table className="w-full table-auto">
+  <thead className="bg-gray-50">
+    <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+      <th className="px-6 py-3 text-left">Title</th>
 
-                                
+      <th className="px-6 py-3 text-left">Description</th>
+      <th className="px-6 py-3 text-left">Amount</th>
+      <th className="px-6 py-3 text-left">Tag</th>
+      <th className="px-6 py-3 text-left">Created At</th>
+      <th className="px-6 py-3 text-left"></th>
+    </tr>
+  </thead>
+  <tbody className="bg-white divide-y divide-gray-200">
+    {data.filter(i => i.typ === "input").filter(i => i.is_checked !== true).map(item => (
+      <tr key={item.id} className="hover:bg-gray-100">
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{item.title}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm text-gray-500 truncate w-96">{item.description}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">${item.amount}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+            {item.tag}
+          </span>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          {new Date(item.created_at).toLocaleDateString()}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <button onClick={()=> handleDelete(item.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
 
-                                </div>
-                            </li>
-                )}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+                      
+                      
+                      
+                      
+                
                         
                     </ul>
                     </div>

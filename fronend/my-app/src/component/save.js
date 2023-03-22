@@ -114,7 +114,6 @@ const Save = () => {
                         saving
                         
                         <div className="input-group mb-3 w-25 ms-auto">
-        <span className="input-group-text" id="basic-addon1"><i className="bi bi-sort-up"></i></span>
                       
                         
                         </div>

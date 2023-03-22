@@ -159,20 +159,56 @@ const Reminder = () => {
                     </div>
                     <div className='card-body'>
                   <ul className="list-group">
-                        {data.map(income => 
-                            <li key={income.id} className="list-group-item">
-                                <div className=" d-flex">
-                                <button onClick={()=> handleDelete(income.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
-                                <span className="fw-bold me-auto text-success">{ income.amount.toLocaleString() }$</span>
-                                <span className="fw-bold me-auto text-success">{ income.description } </span>
-                                <span className="fw-bold me-auto text-success">{ income.title } </span>
+                  <table className="w-full table-auto">
+  <thead className="bg-gray-50">
+    <tr className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+      <th className="px-6 py-3 text-left">Title</th>
+      <th className="px-6 py-3 text-left">Description</th>
+      <th className="px-6 py-3 text-left">Amount</th>
+      <th className="px-6 py-3 text-left">Type</th>
+      <th className="px-6 py-3 text-left">time choice</th>
 
-                                
+      <th className="px-6 py-3 text-left">Created At</th>
+      <th className="px-6 py-3 text-left"></th>
+      
+    </tr>
+  </thead>
+  <tbody className="bg-white divide-y divide-gray-200">
+    {data.map(item => (
+      <tr key={item.id} className="hover:bg-gray-100">
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{item.title}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm text-gray-500 truncate w-96">{item.description}</div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">${item.amount}</div>
+        </td>
+       
+        <td className="px-6 py-4 whitespace-nowrap">
+          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+            {item.account_type}
+          </span>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-pink-100 text-pink-800">
+            {item.time_choice}
+          </span>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          {new Date(item.created_at).toLocaleDateString()}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <button onClick={()=> handleDelete(item.id)} className=' me-4 btn btn-danger btn-sm'>Delete<i className="bi bi-trash"></i></button>
 
-                                <span >{new Date(income.date).toLocaleDateString("en-US")}</span>
-                                </div>
-                            </li>
-                )}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
                         
                     </ul>
                     </div>
