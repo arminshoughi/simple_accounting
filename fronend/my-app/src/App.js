@@ -6,6 +6,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import Draft from './component/draft';
 import Expenses from './component/Expenses';
 import Home from './component/Home';
 import Incomes from './component/Incomes';
@@ -47,6 +48,8 @@ export const App = () => {
             <Route path="/receivablechecks" element={<Receivablechecks />} />
             <Route path="/savings" element={<Save />} />
             <Route path="/reminder" element={<Reminder />} />
+            <Route path="/draft" element={<Draft />} />
+
 
 
             

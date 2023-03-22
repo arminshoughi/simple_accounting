@@ -39,6 +39,9 @@ console.log("narges",data.username)
       <li>
         <NavLink to="/reminder" className={({isActive}) => (isActive ? "active nav-link text-light" : 'nav-link text-light')}>Reminder</NavLink>
       </li>
+      <li>
+        <NavLink to="/draft" className={({isActive}) => (isActive ? "active nav-link text-light" : 'nav-link text-light')}>Draft</NavLink>
+      </li>
     </ul>
     <hr />
     <div className="text-light">
