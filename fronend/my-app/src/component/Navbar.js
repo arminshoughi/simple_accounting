@@ -41,11 +41,7 @@ const{data} = useNotification()
 {data.length !== 0?<div class="rounded-full text-white  bg-red-400 w-5 h-5 text-sm mt-2 -ml-4 z-50">{data.length}</div>:""}
 
           </div>
-        {notifications.filter(item => item.read === false).length !== 0 && 
-        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          {notifications.filter(item => item.read === false).length}
-    
-  </span>}
+        
 </button>
 
 <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -56,7 +52,7 @@ const{data} = useNotification()
   <ul className="list-group">
     {data.map(item => <li key={item.id} className="list-group-item d-flex justify-content-between align-items-start">
     <div className="ms-2 me-auto">
-      <div className={!item.read && "fw-bold" || "text-muted"}>{item.account_type === "input" ?current.username +`You must receive  ${item.amount} amount under a ${item.title} title on a ${item.reminding_time} date`:current.username +`You must pay  ${item.amount} amount under a ${item.title} title on a ${item.reminding_time} date` }</div>
+      <div className={!item.read && "fw-bold" || "text-muted"}>{item.account_type === "input" ?current.username + ` You must receive  ${item.amount} amount under a ${item.title} title on a ${item.reminding_time} date`:current.username +`You must pay  ${item.amount} amount under a ${item.title} title on a ${item.reminding_time} date` }</div>
     </div>
   
   </li>)}

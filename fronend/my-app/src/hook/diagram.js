@@ -22,8 +22,8 @@ export function useDiagram() {
         setData(res.data);
       })
       .catch(function (err) {
-        if (err.response) {
-          console.error("Res Error: ", err.response.status);
+        if (err.response.statusText === "Unauthorized") {
+          window.location.href = "/login"
         } else if (err.request) {
           console.error("Req Error");
         } else {
