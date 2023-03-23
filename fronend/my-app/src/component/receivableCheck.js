@@ -14,10 +14,11 @@ const Receivablechecks = () => {
   const [title, setTitle] = useState();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState();
+  const [flag, setTest] = useState(false);
 
   const [tag, setTag] = useState();
 
-  const {data}= useMaster()
+  const {data}= useMaster(flag)
   const {data:current}= useCurrent()
 
   console.log(data, "sssasdasdsssas");
@@ -53,7 +54,8 @@ const Receivablechecks = () => {
           }
         )
         .then((result) => {
-         console.log("asdasdd")
+          setTest(!flag)
+
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -79,12 +81,12 @@ const Receivablechecks = () => {
           }
         )
         .then((result) => {
+          setTest(!flag)
         
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
         });
-      localStorage.setItem("flag", "true");
     };
 
 

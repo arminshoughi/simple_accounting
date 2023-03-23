@@ -20,9 +20,10 @@ const Reminder = () => {
   const [accountType, setAccountType] = useState();
   const [reminderType, setReminderType] = useState();
   const [reminderTime, setReminderTime] = useState();
+  const [flag, setTest] = useState(false);
 
   
-  const {data}= useReminder()
+  const {data}= useReminder(flag)
   const {data:current}= useCurrent()
 
   console.log(data, "sssasdasdsssas");
@@ -58,7 +59,7 @@ const Reminder = () => {
           }
         )
         .then((result) => {
-         console.log("asdasdd")
+          setTest(!flag)
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -82,7 +83,7 @@ const Reminder = () => {
           }
         )
         .then((result) => {
-        
+          setTest(!flag)
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");

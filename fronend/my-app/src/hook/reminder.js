@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export function useReminder() {
+export function useReminder(flag) {
   const [collages, setData] = useState([]);
   const access = localStorage.getItem('access')
 
@@ -32,7 +32,7 @@ export function useReminder() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [flag]);
 
   const data = React.useMemo(() => collages, [collages]);
   return {

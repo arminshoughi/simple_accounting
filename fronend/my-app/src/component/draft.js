@@ -25,8 +25,9 @@ const Draft = () => {
     setIs_checked(e.target.value)
   }
   const [tag, setTag] = useState();
+  const [flag, setFlag] = useState(false);
 
-  const {data}= useDraft()
+  const {data}= useDraft(flag)
   const {data:current}= useCurrent()
 
   
@@ -57,7 +58,8 @@ const Draft = () => {
           }
         )
         .then((result) => {
-         console.log("asdasdd")
+          setFlag(!flag)
+
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -81,6 +83,7 @@ const Draft = () => {
           }
         )
         .then((result) => {
+          setFlag(!flag)
         
         })
         .catch((error) => {

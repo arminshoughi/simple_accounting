@@ -16,8 +16,10 @@ const Incomes = () => {
   const [description, setDescription] = useState();
 
   const [tag, setTag] = useState();
+  const [flag, setTest] = useState(false);
 
-  const {data}= useMaster()
+
+  const {data}= useMaster(flag)
   const {data:current}= useCurrent()
 
   console.log(data, "sssasdasdsssas");
@@ -52,7 +54,7 @@ const Incomes = () => {
           }
         )
         .then((result) => {
-         console.log("asdasdd")
+         setTest(!flag)
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -76,6 +78,7 @@ const Incomes = () => {
           }
         )
         .then((result) => {
+          setTest(!flag)
         
         })
         .catch((error) => {

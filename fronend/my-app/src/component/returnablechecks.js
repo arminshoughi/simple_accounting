@@ -16,14 +16,11 @@ const Returnablechecks = () => {
   const [description, setDescription] = useState();
 
   const [tag, setTag] = useState();
+  const [flag, setTest] = useState(false);
 
-  const {data}= useMaster()
+  const {data}= useMaster(flag)
   const {data:current}= useCurrent()
 
-  console.log(data, "sssasdasdsssas");
-    useEffect(() => {
-        fetch(`/api/incomes/?ordering=${ordering}`).then(res => res.json()).then(res => { setIncomes(res)});
-    }, [ordering]);
 
 
     const handleSubmit = (e) => {
@@ -53,12 +50,12 @@ const Returnablechecks = () => {
           }
         )
         .then((result) => {
-         console.log("asdasdd")
+          setTest(!flag)
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
         });
-      localStorage.setItem("flag", "true");
+     
     };
 
     const handleDelete = (e) => {
@@ -77,12 +74,12 @@ const Returnablechecks = () => {
           }
         )
         .then((result) => {
-        
+          setTest(!flag)
         })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
         });
-      localStorage.setItem("flag", "true");
+    
     };
 
 

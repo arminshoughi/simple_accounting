@@ -17,8 +17,9 @@ const Incomes = () => {
   const [delete1, setDelete] = useState();
 
   const [tag, setTag] = useState();
+  const [flag, setTest] = useState(false);
 
-  const {data}= useMaster()
+  const {data}= useMaster(flag)
   const {data:current}= useCurrent()
 console.log(data , "sdasdasd");
     useEffect(() => {
@@ -52,6 +53,8 @@ console.log(data , "sdasdasd");
           }
         )
         .then((result) => {
+         setTest(!flag)
+
           })
         .catch((error) => {
           alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -61,7 +64,7 @@ console.log(data , "sdasdasd");
     const handleDelete = (e) => {
       axios 
         .delete(
-           `http://127.0.0.1:8000/api/dashboard/account/${11}/`,
+           `http://127.0.0.1:8000/api/dashboard/account/${e}/`,
          
           {
 
@@ -74,6 +77,7 @@ console.log(data , "sdasdasd");
           }
         )
         .then((result) => {
+          setTest(!flag)
         
         })
         .catch((error) => {

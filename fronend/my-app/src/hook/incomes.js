@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export function useMaster() {
+export function useMaster(e) {
   const [collages, setData] = useState([]);
   console.log("npm i axios")
   const access = localStorage.getItem('access')
@@ -33,10 +33,10 @@ export function useMaster() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [e]);
+
 
   const data = React.useMemo(() => collages, [collages]);
-console.log(data , "Asdasdasdxx")
   return {
     data,
   };

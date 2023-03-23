@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export function useDraft() {
+export function useDraft(flag) {
   const [collages, setData] = useState([]);
   console.log("npm i axios")
   const access = localStorage.getItem('access')
@@ -33,7 +33,7 @@ export function useDraft() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [flag]);
 
   const data = React.useMemo(() => collages, [collages]);
 console.log(data , "Asdasdasdxx")
