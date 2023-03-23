@@ -8,16 +8,14 @@ import { useMaster } from '../hook/incomes';
 
 
 const Save = () => {
-  const [ordering, setOrdering] = useState('-date');
   const access = localStorage.getItem('access')
   const [year, setTYear] = useState();
   const [mounth, setMounth] = useState();
   const [save, setSave] = useState();
 
-  const [tag, setTag] = useState();
 
-  const {data}= useMaster()
-  const {data:current}= useCurrent()
+
+ 
 
     
 

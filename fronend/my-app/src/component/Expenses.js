@@ -16,7 +16,7 @@ const Incomes = () => {
   const [description, setDescription] = useState();
   const [delete1, setDelete] = useState();
 
-  const [tag, setTag] = useState();
+  const [tag, setTag] = useState("food");
   const [flag, setTest] = useState(false);
 
   const {data}= useMaster(flag)

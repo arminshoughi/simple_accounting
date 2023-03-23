@@ -8,14 +8,13 @@ import { useMaster } from '../hook/incomes';
 
 
 const Returnablechecks = () => {
-  const [incomes, setIncomes] = useState([]);
-  const [ordering, setOrdering] = useState('-date');
+
   const access = localStorage.getItem('access')
   const [title, setTitle] = useState();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState();
 
-  const [tag, setTag] = useState();
+  const [tag, setTag] = useState("food");
   const [flag, setTest] = useState(false);
 
   const {data}= useMaster(flag)
