@@ -49,6 +49,10 @@ localStorage.setItem('access', a)
       localStorage.setItem("flag", "true");
     };
     const location = useLocation();
+
+    const onOptionChange = (e) => {
+      setSex(e.target.value);
+    };
     useEffect   (() => {
       
     
@@ -96,20 +100,51 @@ localStorage.setItem('access', a)
                         <label htmlFor='password'>national_code</label>
                         <input
                         onChange={(e) => setNational_code(e.target.value)}
-                        type='text' name="national_code" className='form-control' id='password' />
+                        type='number' name="national_code" className='form-control' id='password' />
                     </div>
                     <div className='form-group'>
                         <label htmlFor='password'>birthday</label>
                         <input 
                         onChange={(e) => setBirthday(e.target.value)}
-                        type='text' name="birthday" className='form-control' id='password' />
+                        type='date' name="birthday" className='form-control' id='password' />
                     </div>
-                    <div className='form-group'>
-                        <label htmlFor='password'>sex</label>
+
+
+                    <div>
+                    <label htmlFor="input" className='mt-2'>sex</label>
+                    <div className="ml-3 mt-0.5">
+                      <div class="form-check mt-2">
                         <input
-                        onChange={(e) => setSex(e.target.value)}
-                        type='text' name="sex" className='form-control' id='password' />
-                    </div>  
+                          class="form-check-input"
+                          type="radio"
+                          name="sex"
+                          value="Male"
+                          id="Male"
+                          checked={sex === "Male"}
+                          onChange={setSex}
+                        />
+                        <label class="form-check-label" htmlFor="input">
+                          Male
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="sex"
+                          value="Famale"
+                          id="Famale"
+                          checked={sex === "Famale"}
+                          onChange={onOptionChange}
+                        />
+                        <label class="form-check-label" htmlFor="Famale">
+                        Famale
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                   
                     <button type="submit" className='btn mt-2 btn-primary'>Sign in</button>
                 </form>
                 </div>
