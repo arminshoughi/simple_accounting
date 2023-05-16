@@ -54,9 +54,11 @@ const Receivablechecks = () => {
       )
       .then((result) => {
         setTest(!flag);
+        alert("submit"+"  " +title)
       })
       .catch((error) => {
-        alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
+        alert("fill all of data");
+
       });
     localStorage.setItem("flag", "true");
   };
@@ -76,6 +78,8 @@ const Receivablechecks = () => {
       )
       .then((result) => {
         setTest(!flag);
+        alert("remove ");
+
       })
       .catch((error) => {
         alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -112,13 +116,13 @@ const Receivablechecks = () => {
                   <label htmlFor="amount">description</label>
                   <input
                     onChange={(e) => setDescription(e.target.value)}
-                    name="amount"
+                    name="description"
                     className="form-control"
-                    id="amount"
-                    placeholder="Enter amount"
+                    id="description"
+                    placeholder="Enter description"
                   />
                 </div>
-                <label htmlFor="amount">tag</label>
+                <label htmlFor="description">tag</label>
                 <select
                   value={tag}
                   onChange={(e) => setTag(e.target.value)}

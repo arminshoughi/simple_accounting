@@ -118,6 +118,7 @@ const Reminder = () => {
                   />
                   <label htmlFor="amount">description</label>
                   <input
+                  type='numberw'
                     onChange={(e) => setDescription(e.target.value)}
                     name="amount"
                     className="form-control"

@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useCurrent } from "../hook/current";
 import { useMaster } from "../hook/incomes";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Incomes = () => {
   const [incomes, setIncomes] = useState([]);
@@ -17,7 +18,7 @@ const Incomes = () => {
 
   const { data } = useMaster(flag);
   const { data: current } = useCurrent();
-
+  const notify = () => alert("submit"+ title);
   console.log(data, "sssasdasdsssas");
   useEffect(() => {
     fetch(`/api/incomes/?ordering=${ordering}`)
@@ -53,9 +54,10 @@ const Incomes = () => {
       )
       .then((result) => {
         setTest(!flag);
+        alert("submit"+"  " +title)
       })
-      .catch((error) => {
-        alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
+      .catch((e) => {
+        alert("fill all of data");
       });
     localStorage.setItem("flag", "true");
   };
@@ -75,6 +77,8 @@ const Incomes = () => {
       )
       .then((result) => {
         setTest(!flag);
+        alert("remove ");
+
       })
       .catch((error) => {
         alert("نام کاربری و یا رمز عبور اشتباه است لطفا مجدد تلاش کنید.");
@@ -83,7 +87,10 @@ const Incomes = () => {
   };
 
   return (
+    
     <div className="p-4">
+                
+
       <h1>Incomes</h1>
       <div className="row">
         <div className="col-12 my-4">
@@ -111,6 +118,7 @@ const Incomes = () => {
                   />
                   <label htmlFor="amount">description</label>
                   <input
+                  
                     onChange={(e) => setDescription(e.target.value)}
                     name="amount"
                     className="form-control"
@@ -139,7 +147,8 @@ const Incomes = () => {
                   <option value="health">health</option>
                   <option value="other">other</option>
                 </select>
-                <button type="submit" className="m-2 btn btn-outline-primary">
+                <button  type="submit" className="m-2 btn btn-outline-primary">
+
                   submit
                 </button>
               </form>
