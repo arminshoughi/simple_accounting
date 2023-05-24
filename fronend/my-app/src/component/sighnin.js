@@ -29,7 +29,7 @@ localStorage.setItem('access', a)
             last_name:last_name,
             national_code: national_code,
             birthday: birthday,
-            sex: sex
+            sex: Number(sex)
           },
           {
             headers: {
@@ -118,10 +118,10 @@ localStorage.setItem('access', a)
                           class="form-check-input"
                           type="radio"
                           name="sex"
-                          value="Male"
+                          value="1"
                           id="Male"
-                          checked={sex === "Male"}
-                          onChange={setSex}
+                          checked={sex === "1"}
+                          onChange={onOptionChange}
                         />
                         <label class="form-check-label" htmlFor="input">
                           Male
@@ -132,9 +132,9 @@ localStorage.setItem('access', a)
                           class="form-check-input"
                           type="radio"
                           name="sex"
-                          value="Famale"
+                          value="2"
                           id="Famale"
-                          checked={sex === "Famale"}
+                          checked={sex === "2"}
                           onChange={onOptionChange}
                         />
                         <label class="form-check-label" htmlFor="Famale">

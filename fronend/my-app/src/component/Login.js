@@ -8,6 +8,7 @@ const Login = () => {
     const [a, setA] = useState();
     const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
+    
 console.log(a , "asdasdasd")
 localStorage.setItem('access', a)
     const handleSubmit = (e) => {
@@ -48,7 +49,7 @@ localStorage.setItem('access', a)
       }
     }, [location.pathname]);
   return (
-    <div className='row  !mt-20 !ml-28'>
+    <div className='row !mt-20 !ml-28'>
         <div className='col-6'>
             <div className='card'>
                 <div className='card-body  bg-light'>

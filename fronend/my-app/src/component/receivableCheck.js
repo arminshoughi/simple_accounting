@@ -18,7 +18,7 @@ const Receivablechecks = () => {
   const { data } = useMaster(flag);
   const { data: current } = useCurrent();
 
-  console.log(data, "sssasdasdsssas");
+  
   useEffect(() => {
     fetch(`/api/incomes/?ordering=${ordering}`)
       .then((res) => res.json())

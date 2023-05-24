@@ -35,7 +35,6 @@ const Incomes = () => {
         {
           user_id: current.id,
           is_checked: "false",
-
           title: title,
           description: description,
           amount: amount,
