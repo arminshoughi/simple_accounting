@@ -1,6 +1,7 @@
 ## Installation Guide
 
-To creating main database for project, do following steps:
+To creating main database for project, do following steps:  
+
 
 ```shell script
 $ sudo su - postgres

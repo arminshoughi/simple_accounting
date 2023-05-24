@@ -1,0 +1,62 @@
+version: "3.3"
+
+services:
+#  db:
+#    image: postgres:latest
+#    restart: always
+#    environment:
+#      - POSTGRES_USER= accounting_user
+#      - POSTGRES_PASSWORD= accounting_password@
+#      - POSTGRES_DB= accounting_db
+#    volumes:
+#      - db_data:/var/lib/postgresql/data/
+#    ports:
+#      - "5432:5432"
+#
+#  redis:
+#    image: redis:latest
+#    restart: always
+#    volumes:
+#      - redis_data:/data
+#
+#  web:
+#    build: ./backend/accounting
+#    restart: always
+#    command: >
+#      sh -c "python manage.py migrate &&
+#             python -m pip install --upgrade pip &&
+#             python -m pip install -r requirements.txt &&
+#             python manage.py initial_data --clear &&
+#             python manage.py runserver 0.0.0.0:8000"
+#    volumes:
+#      - ./backend/accounting/:/back
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#      - redis
+#      - worker
+#
+#  worker:
+#    build: ./backend/accounting
+#    restart: always
+#    command: celery -A accounting worker -l info -B
+#    volumes:
+#      - ./backend/accounting/:/back
+#    depends_on:
+#      - db
+#      - redis
+
+  react-ui:
+    build: ./fronend/my-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./fronend/my-app/:/front
+
+#    depends_on:
+#      - web
+
+#volumes:
+#  db_data:
+#  redis_data:
